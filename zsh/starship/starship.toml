@@ -1,0 +1,19 @@
+add_newline = false
+scan_timeout = 10
+
+[character]
+use_symbol_for_status = true
+symbol = "﬌"
+error_symbol = "✗"
+vicmd_symbol = ""
+
+[package]
+disabled = false
+
+[directory]
+truncation_length = 8
+prefix = "in "
+
+[line_break]
+disabled = false
+

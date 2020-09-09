@@ -1,0 +1,119 @@
+#
+#  ███████╗███████╗██╗  ██╗
+#  ╚══███╔╝██╔════╝██║  ██║
+#    ███╔╝ ███████╗███████║
+#   ███╔╝  ╚════██║██╔══██║
+#  ███████╗███████║██║  ██║
+#  ╚══════╝╚══════╝╚═╝  ╚═╝
+#                          config-file
+
+# ================================================
+#  General Setting
+# ================================================
+
+ # Default Program -------------------------------
+
+   eval "$(starship init zsh)"
+
+ # Options ---------------------------------------
+
+   setopt NO_CASE_GLOB
+   setopt AUTO_CD
+   setopt NO_BEEP
+
+ # Auto Completion -------------------------------
+
+   # autoload -Uz compinit && compinit
+   autoload -U compinit
+   zstyle ':completion:*' menu select
+
+   # Completion for kitty
+   # kitty + complete setup zsh | source /dev/stdin
+
+   # Partial completion suggestions
+   zstyle ':completion:*' list-suffixes
+   zstyle ':completion:*' expand prefix suffix
+
+   # Case insensitive path-completion
+   zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+   # Hidden file
+   zmodload zsh/complist
+   compinit
+   _comp_options+=(globdots)
+
+# ================================================
+#  Source
+# ================================================
+
+  # Syntax Highlighting ---------------------------
+
+    source "$ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+
+# ================================================
+#  Directory
+# ================================================
+
+  # 'cd' command act like 'pushd'
+  # example: 'ls =2/subdirectory'
+     setopt autopushd
+
+  # change directory in stack
+  # example: 'cd -2'
+     setopt pushdminus
+
+  # don't print the directory stack after pushd or popd
+     setopt pushdsilent
+
+  # pushd without argument goto $HOME
+     setopt pushdtohome
+
+  # ignore duplicate in stack
+     setopt pushdignoredups
+
+
+
+# ================================================
+#  Funtions
+# ================================================
+
+ # Git Integration -------------------------------
+
+   # autoload -Uz vcs_info
+   # precmd_vcs_info() { vcs_info }
+   # precmd_functions+=( precmd_vcs_info )
+   # setopt prompt_subst
+   # #zstyle ':vcs_info:git:*' formats '%F{240}« %b | %r »%f'
+   # zstyle ':vcs_info:git:*' formats '%F{130}« %b »%f'
+   # zstyle ':vcs_info:*' enable git
+
+
+# ================================================
+#  Misc
+# ================================================
+
+  # FZF ------------------------------------------
+
+  [ -f $ZDOTDIR/plugins/fzf ] && source $ZDOTDIR/plugins/fzf
+
+  # Prompt ----------------------------------------
+
+  # source "/Users/nan/.config/zsh/prompt.zsh"
+
+
+
+if [[ -o login ]]; then
+    print 'This is a login shell'
+else
+    print 'Not login'
+fi
+
+setopt SH_WORD_SPLIT
+
+# vi mode
+source "$ZDOTDIR/plugins/vimode"
+
+# aliases
+source "$XDG_CONFIG_HOME/zsh/plugins/aliases"
+
