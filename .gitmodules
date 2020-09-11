@@ -4,3 +4,6 @@
 [submodule "macos-terminal-themes"]
 	path = macos-terminal-themes
 	url = https://github.com/lysyi3m/macos-terminal-themes.git
+[submodule "nvim/pack/plugins/opt/vim-polyglot"]
+	path = nvim/pack/plugins/opt/vim-polyglot
+	url = https://github.com/sheerun/vim-polyglot.git
