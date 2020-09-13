@@ -7,3 +7,39 @@
 [submodule "nvim/pack/plugins/opt/vim-polyglot"]
 	path = nvim/pack/plugins/opt/vim-polyglot
 	url = https://github.com/sheerun/vim-polyglot.git
+[submodule "nvim/pack/bundle/opt/vim-floaterm"]
+	path = nvim/pack/bundle/opt/vim-floaterm
+	url = https://github.com/voldikss/vim-floaterm.git
+[submodule "nvim/pack/bundle/opt/fzf.vim"]
+	path = nvim/pack/bundle/opt/fzf.vim
+	url = https://github.com/junegunn/fzf.vim.git
+[submodule "nvim/pack/bundle/opt/papercolor-theme"]
+	path = nvim/pack/bundle/opt/papercolor-theme
+	url = https://github.com/NLKNguyen/papercolor-theme.git
+[submodule "nvim/pack/bundle/opt/goyo.vim"]
+	path = nvim/pack/bundle/opt/goyo.vim
+	url = https://github.com/junegunn/goyo.vim.git
+[submodule "nvim/pack/bundle/opt/limelight.vim"]
+	path = nvim/pack/bundle/opt/limelight.vim
+	url = https://github.com/junegunn/limelight.vim.git
+[submodule "nvim/pack/bundle/opt/lightline.vim"]
+	path = nvim/pack/bundle/opt/lightline.vim
+	url = https://github.com/itchyny/lightline.vim.git
+[submodule "nvim/pack/bundle/opt/vim-polyglot"]
+	path = nvim/pack/bundle/opt/vim-polyglot
+	url = https://github.com/sheerun/vim-polyglot.git
+[submodule "nvim/pack/bundle/opt/vim-easy-align"]
+	path = nvim/pack/bundle/opt/vim-easy-align
+	url = https://github.com/junegunn/vim-easy-align.git
+[submodule "nvim/pack/bundle/opt/vim-sandwich"]
+	path = nvim/pack/bundle/opt/vim-sandwich
+	url = https://github.com/machakann/vim-sandwich.git
+[submodule "nvim/pack/bundle/opt/vim-snippets"]
+	path = nvim/pack/bundle/opt/vim-snippets
+	url = https://github.com/honza/vim-snippets.git
+[submodule "nvim/pack/bundle/opt/vimwiki"]
+	path = nvim/pack/bundle/opt/vimwiki
+	url = https://github.com/vimwiki/vimwiki.git
+[submodule "nvim/pack/bundle/start/coc.nvim"]
+	path = nvim/pack/bundle/start/coc.nvim
+	url = https://github.com/neoclide/coc.nvim.git

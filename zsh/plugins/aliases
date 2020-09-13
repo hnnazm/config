@@ -33,6 +33,7 @@
 
  # Nvim ------------------------------------------
  
+   alias vim='nvim'
    alias lv='nvim .'
    alias goyo='nvim -c Goyo'
 
