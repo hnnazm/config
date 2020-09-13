@@ -1,0 +1,14 @@
+{
+    "python.jediEnabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+
+    "git.addGBlameToVirtualText": true,
+
+    "vetur.format.options.tabSize": 4,
+    "vetur.format.defaultFormatter.html": "none",
+    "vetur.format.defaultFormatter.css": "none",
+    "vetur.format.defaultFormatter.js": "none",
+
+    "snippets.ultisnips.enable": false,
+}
