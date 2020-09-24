@@ -72,7 +72,8 @@
   # ignore duplicate in stack
      setopt pushdignoredups
 
-
+  # frequent directory
+     hash -d lab='/Users/nan/lab'
 
 # ================================================
 #  Funtions

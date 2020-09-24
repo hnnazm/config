@@ -23,6 +23,15 @@
    alias po=popd
    alias d='dirs -v'
 
+ # Create Directory ------------------------------
+
+   alias mkdir='mkdir -pv'
+
+ # Change Directory ------------------------------
+ 
+   alias ..='cd ..'
+   alias ...='cd ../../'
+
  # Remove ----------------------------------------
 
    # alias rm='rm -i'
