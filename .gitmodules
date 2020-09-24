@@ -40,3 +40,6 @@
 [submodule "nvim/pack/bundle/start/coc.nvim"]
 	path = nvim/pack/bundle/start/coc.nvim
 	url = https://github.com/neoclide/coc.nvim.git
+[submodule "nvim/pack/bundle/start/vim-polyglot"]
+	path = nvim/pack/bundle/start/vim-polyglot
+	url = https://github.com/sheerun/vim-polyglot.git
