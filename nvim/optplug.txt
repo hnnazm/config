@@ -1,4 +1,0 @@
-fzf.vim			papercolor-theme	vim-sandwich
-goyo.vim		vim-easy-align		vim-snippets
-lightline.vim		vim-floaterm		vimwiki
-limelight.vim		vim-polyglot

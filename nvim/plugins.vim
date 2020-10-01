@@ -14,8 +14,8 @@
    packadd! vim-sandwich
    packadd! vim-easy-align
    packadd! coc.nvim
-   packadd! vim-snippets
    packadd! vim-polyglot
+   packadd! vim-snippets
 
 
 " Plugin Setting –––––––––––––––––––––––––––––––––
@@ -156,31 +156,33 @@
 " ------------------------------------------------
 "  floaterm
 " ------------------------------------------------
-   let g:floaterm_type = "floating"
+   let g:floaterm_shell = "/bin/zsh -l"
+   let g:floaterm_title = "$1/$2"
+   let g:floaterm_winype = "floating"
    let g:floaterm_width = 0.6
    let g:floaterm_height = 0.6
    let g:floaterm_winblend = 0
    let g:floaterm_position = "center"
+   let g:floaterm_autoclose = 1
    let g:floaterm_borderchars = ['─', '│', '─', '│', '┌', '┐', '┘', '└']
 
 "  Set floaterm window's background to black
-   hi FloatermNF ctermbg=bg
+   hi Floaterm ctermbg=bg
 "  Set floating window border line color to cyan, and background to orange
-   hi FloatermBorderNF ctermbg=bg ctermfg=fg
+   hi FloatermBorder ctermbg=bg ctermfg=fg
 
    function s:floatermSettings()
-       " setlocal number
+       setlocal nonumber norelativenumber
        " more settings
    endfunction
 
    autocmd FileType floaterm call s:floatermSettings()
-   autocmd FileType floaterm wincmd H
 
 "  Keymap
-   let g:floaterm_keymap_new    = '\T'
-   let g:floaterm_keymap_prev   = '[t'
-   let g:floaterm_keymap_next   = ']t'
-   let g:floaterm_keymap_toggle = '\t'
+   let g:floaterm_keymap_new    = '<F7>'
+   let g:floaterm_keymap_prev   = '<F8>'
+   let g:floaterm_keymap_next   = '<F9>'
+   let g:floaterm_keymap_toggle = '<F12>'
 
 
 " ------------------------------------------------

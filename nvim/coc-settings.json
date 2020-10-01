@@ -11,4 +11,7 @@
     "vetur.format.defaultFormatter.js": "none",
 
     "snippets.ultisnips.enable": false,
+    "snippets.extends": {
+        "vue": ["html", "css", "javascript"]
+    }
 }

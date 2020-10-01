@@ -94,6 +94,10 @@
       \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
       \,sm:block-blinkwait175-blinkoff150-blinkon175
 
+    set ttimeout
+    set ttimeoutlen=1
+    set ttyfast
+
 
 " ===============================================
 "  Source File
