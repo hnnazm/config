@@ -1,19 +1,32 @@
-add_newline = false
+format = "$all"
 scan_timeout = 10
+add_newline = false
+
+[cmd_duration]
+format = "took [$duration]($style)"
 
 [character]
-use_symbol_for_status = true
-symbol = "﬌"
-error_symbol = "✗"
+format = "$symbol "
+success_symbol = "[﬌](bold green) "
+error_symbol = "[✗](bold red) "
 vicmd_symbol = ""
+disabled = false
 
 [package]
+format = "via [$symbol$version]($style) "
+symbol = "📦 "
+style = "bold red"
+display_private = false
 disabled = false
 
 [directory]
 truncation_length = 8
-prefix = "in "
+truncate_to_repo = true
+format = "[$path]($style)[$read_only]($read_only_style) " 
+style = "bold cyan"
+disabled = false
+read_only = "🔒"
+read_only_style = "bold red"
 
 [line_break]
 disabled = false
-
