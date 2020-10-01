@@ -104,13 +104,13 @@
 
 
 
-if [[ -o login ]]; then
-    print 'This is a login shell'
-else
-    print 'Not login'
-fi
-
-setopt SH_WORD_SPLIT
+# if [[ -o login ]]; then
+#     print 'This is a login shell'
+# else
+#     print 'Not login'
+# fi
+# 
+# setopt SH_WORD_SPLIT
 
 # vi mode
 source "$ZDOTDIR/plugins/vimode"
