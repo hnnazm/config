@@ -3,6 +3,6 @@
 local/
 coc/
 
-nvim/.netrwhist
+nvim/.*
 
 zsh/.*
