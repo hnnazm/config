@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if ! _have docker; then
+  return
+fi
+
+nginxup() {
+  id=$(docker run \
+    --rm \
+    -P \
+    -d \
+    -v "${PWD}":/usr/share/nginx/html:ro \
+    nginx)
+
+  docker container port "$id"
+
+  docker container logs -f "$id"
+}

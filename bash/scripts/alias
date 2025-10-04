@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+alias ls='ls --color=auto'
+alias la='ls -lhA'
+alias lr='ls -lR'
+
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+alias mkdir='mkdir -pv'
+
+alias rm='rm -i'
+
+alias h='history'
+
+alias clear='clear -x'
+
+alias vim='nvim'
+
+# macOS ––––––––––––––––––––––––––––––––––––––––––
+alias hidefiles='defaults write com.apple.finder AppleShowAllFiles FALSE'
+alias showfiles='defaults write com.apple.finder AppleShowAllFiles TRUE'
+
+_have() { type "$1" &>/dev/null; }

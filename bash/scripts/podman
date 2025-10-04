@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if ! _have gh; then
+  return
+fi
+
+alias p=podman

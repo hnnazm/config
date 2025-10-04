@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+if ! _have gh; then
+  return
+fi
+
+function explain() {
+  if [ -z "$1" ]; then
+    echo "Usage: gh copilot explain <text>"
+    return 1
+  fi
+
+  # pass arguments as string
+  gh copilot explain "$*"
+}
+
+function suggest() {
+  if [ -z "$1" ]; then
+    echo "Usage: gh copilot suggest <text>"
+    return 1
+  fi
+
+  # pass arguments as string
+  gh copilot suggest --target shell "$*"
+}
+
+alias '???'=explain
+alias '??'=suggest

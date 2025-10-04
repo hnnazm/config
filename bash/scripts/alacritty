@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if ! _have alacritty; then
+  return
+fi
+
+[ -f ~/.bash_completion/alacritty ] && source ~/.bash_completion/alacritty

@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+# nvimr - Launch Neovim with a dynamic --listen port and show it in :messages
+# Usage:
+#   nvimr                # picks a free port between 9000-9999
+#   nvimr 9317           # use exact port
+#   NVIMR_START_PORT=10000 NVIMR_END_PORT=10100 nvimr
+
+ADDR="${NVIMR_ADDR:-127.0.0.1}"
+START="${NVIMR_START_PORT:-9000}"
+END="${NVIMR_END_PORT:-9999}"
+
+# If first argument is a number, use it as the exact port
+if [[ ${1-} =~ ^[0-9]+$ ]]; then
+  START="$1"
+  END="$1"
+  shift
+fi
+
+pick_port() {
+  for ((p=START; p<=END; p++)); do
+    if command -v ss >/dev/null 2>&1; then
+      if ! ss -ltn "sport = :$p" | grep -q ":$p"; then
+        echo "$p"; return 0
+      fi
+    elif command -v lsof >/dev/null 2>&1; then
+      if ! lsof -iTCP:"$p" -sTCP:LISTEN -Pn >/dev/null 2>&1; then
+        echo "$p"; return 0
+      fi
+    else
+      >&2 echo "Error: need either 'ss' or 'lsof' to detect free ports."
+      return 1
+    fi
+  done
+  return 1
+}
+
+nvimr() {
+  PORT="$(pick_port)" || { echo "No free port found in range $START-$END" >&2; exit 1; }
+
+  ADDR_PORT="${ADDR}:${PORT}"
+  URL="http://${ADDR_PORT}"
+
+  exec nvim --listen "${ADDR_PORT}" "$@"
+}
+
+nvimc() {
+  local port="${1:-}"
+
+  if [[ -z "$port" ]]; then
+    echo "Usage: nvimc <port>" >&2
+    return 1
+  fi
+
+  echo "Connecting to Neovim instance at ${ADDR}:${port} ..."
+  nvim --server "${ADDR}:${port}" --remote-ui
+}

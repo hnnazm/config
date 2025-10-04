@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+sourcenv() {
+  file=$1
+
+  set -a
+
+  if [[ -f "$file" ]]; then
+    source "$file"
+  else
+    source .env
+  fi
+
+  set +a
+}

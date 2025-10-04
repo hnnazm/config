@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+if ! _have fzf; then
+  return
+fi
+
+eval "$(fzf --bash)"
+
+if [[ ! "$PATH" == "*/${HOMEBREW_PREFIX}/opt/fzf/bin*" ]]; then
+  export PATH="${PATH:+${PATH}:}/${HOMEBREW_PREFIX}/opt/fzf/bin"
+fi
+
+eval "$(fzf --bash)"

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if [ ! -d "${HOME}/.claude" ]; then
+  return
+fi
+
+export PATH="$PATH:${HOME}/.claude/local"
+#alias claude="${HOME}/.claude/local/claude"
