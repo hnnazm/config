@@ -17,8 +17,10 @@
 	# Diff shortcuts
 	df = diff
 	dc = diff --cached
+	dh = diff HEAD
+  dhr = !f() { git diff "${1:-HEAD~1}".."${2:-HEAD}"; }; f
+  dhl = !f() { git log -p "${1:-HEAD~1}".."${2:-HEAD}"; }; f
 	ds = diff --stat
-	dl = diff HEAD~1 HEAD
 
 	# Branch management
 	bra = branch -a
