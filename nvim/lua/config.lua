@@ -93,33 +93,30 @@ require("lazy").setup({
   },
   {
     "mason-org/mason-lspconfig.nvim",
-    opts = {},
-    dependencies = {
-      {
-        "mason-org/mason.nvim",
-        opts = {}
+    opts = {
+      automatic_enable = true,
+      ensure_installed = {
+        "gopls",
+        "ts_ls",
+        "vue_ls",
+        "lua_ls",
+        "tailwindcss",
+        "copilot",
+        "phpactor",
+        "bashls",
+        "cssls",
+        "vimls",
+        "docker_language_server",
+        "html",
+        "pylsp",
+        "yamlls",
       },
+    },
+    dependencies = {
+      { "mason-org/mason.nvim", opts = {} },
       {
         "neovim/nvim-lspconfig",
         config = function ()
-            -- vim.lsp.enable({
-            -- "gopls"
-            -- "ts_ls",
-            -- "vue_ls",
-            -- "lua_ls",
-            -- "tailwindcss",
-            -- "copilot_ls",
-            -- "go_ls",
-            -- "php_ls",
-            -- "bash_ls",
-            -- "css_ls",
-            -- "vim_ls",
-            -- "docker_ls",
-            -- "html_ls",
-            -- "python_ls",
-            -- "yaml_ls",
-            -- })
-
           vim.diagnostic.config({
             signs = {
               active = true,
@@ -142,7 +139,6 @@ require("lazy").setup({
               end,
             },
           })
-
         end
       }
     },
