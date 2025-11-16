@@ -7,7 +7,7 @@ if not vim.loop.fs_stat(lazypath) then
     "clone",
     "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
+    "--branch=stable",
     lazypath,
   })
 end
@@ -23,23 +23,6 @@ require("lazy").setup({
       vim.cmd.colorscheme "catppuccin"
     end
   },
-  -- {
-  --   "ellisonleao/gruvbox.nvim",
-  --   priority = 1000,
-  --   config = function()
-  --     vim.o.background = "dark"
-  --     vim.cmd([[colorscheme gruvbox]])
-  --   end,
-  --   init = function()
-  --     require("gruvbox").setup({
-  --       contrast = "soft", -- can be "hard", "soft" or empty string
-  --       transparent_mode = true,
-  --     })
-  --
-  --     vim.o.background = "dark"
-  --     vim.cmd("colorscheme gruvbox")
-  --   end
-  -- },
   {
     "ibhagwan/fzf-lua",
     build = "./install --all",
