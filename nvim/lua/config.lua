@@ -47,24 +47,23 @@ require("lazy").setup({
     lazy = false,
     build = ":TSUpdate",
     config = function()
-      require("nvim-treesitter").setup({
-        ensure_installed = "all",
-        highlight = {
-          enable = true,
-          additional_vim_regex_highlighting = { "markdown" },
-        },
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = "gnn",
-            node_incremental = "grn",
-            scope_incremental = "grc",
-            node_decremental = "grm",
-          },
-        },
-        indent = {
-          enable = true
-        }
+      local ts = require('nvim-treesitter')
+      ts.setup({})
+      ts.install({
+        "go",
+        "typescript",
+        "javascript",
+        "vue",
+        "lua",
+        "css",
+        "php",
+        "bash",
+        "vim",
+        "vimdoc",
+        "dockerfile",
+        "html",
+        "python",
+        "yaml",
       })
     end
   },
