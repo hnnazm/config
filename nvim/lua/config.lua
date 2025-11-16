@@ -69,29 +69,6 @@ require("lazy").setup({
     end
   },
   {
-    "L3MON4D3/LuaSnip",
-    version = "2.*",
-    build = "make install_jsregexp",
-    dependencies = {
-      "rafamadriz/friendly-snippets"
-    },
-    config = function()
-      require("luasnip.loaders.from_vscode").lazy_load()
-
-      local ls = require("luasnip")
-
-      vim.keymap.set({ "i" }, "<C-K>", function() ls.expand() end, { silent = true })
-      vim.keymap.set({ "i", "s" }, "<C-L>", function() ls.jump(1) end, { silent = true })
-      vim.keymap.set({ "i", "s" }, "<C-J>", function() ls.jump(-1) end, { silent = true })
-
-      vim.keymap.set({ "i", "s" }, "<C-E>", function()
-        if ls.choice_active() then
-          ls.change_choice(1)
-        end
-      end, { silent = true })
-    end,
-  },
-  {
     "mason-org/mason-lspconfig.nvim",
     opts = {
       automatic_enable = true,
@@ -150,7 +127,6 @@ require("lazy").setup({
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
-      "saadparwaiz1/cmp_luasnip",
       -- "zbirenbaum/copilot-cmp",
     },
     config = function()
@@ -199,12 +175,6 @@ require("lazy").setup({
             return vim_item
           end,
         },
-        snippet = {
-          expand = function(args)
-            require("luasnip").lsp_expand(args.body)
-            vim.snippet.expand(args.body)
-          end,
-        },
         mapping = cmp.mapping.preset.insert({
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
@@ -215,7 +185,6 @@ require("lazy").setup({
         sources = cmp.config.sources({
           -- { name = "copilot" },
           { name = "nvim_lsp" },
-          { name = "luasnip" },
           { name = "buffer" },
           { name = "path" },
         })
