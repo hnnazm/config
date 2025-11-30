@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if ! _have docker-compose; then
+  return
+fi
+
+alias drc='docker-compose'

@@ -46,6 +46,7 @@ scripts=(
   "${BASHDOTDIR}/scripts/ripgrep"
   "${BASHDOTDIR}/scripts/fzf"
   "${BASHDOTDIR}/scripts/extract"
+  "${BASHDOTDIR}/scripts/docker"
   "${BASHDOTDIR}/scripts/podman"
   "${BASHDOTDIR}/scripts/docker-nginx"
   "${BASHDOTDIR}/scripts/nvm"
