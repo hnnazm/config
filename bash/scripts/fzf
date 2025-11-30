@@ -11,4 +11,6 @@ if [[ ! "$PATH" == "*/${HOMEBREW_PREFIX}/opt/fzf/bin*" ]]; then
 fi
 
 eval "$(fzf --bash)"
-source "${XDG_CONFIG_HOME}/fzf/git/fzf-git.sh"
+
+test -e "${XDG_CONFIG_HOME}/fzf/git/fzf-git.sh" && source "${XDG_CONFIG_HOME}/fzf/git/fzf-git.sh"
+test -e "${XDG_CONFIG_HOME}/fzf/docker/docker-fzf" && source "${XDG_CONFIG_HOME}/fzf/docker/docker-fzf"

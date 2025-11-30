@@ -37,6 +37,7 @@ _have() {
 }
 
 scripts=(
+  "${BASHDOTDIR}/bashrc"
   "${BASHDOTDIR}/scripts/homebrew"
   "${BASHDOTDIR}/scripts/prompt"
   "${BASHDOTDIR}/scripts/starship"

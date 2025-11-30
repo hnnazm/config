@@ -4,3 +4,6 @@
 [submodule "fzf/git"]
 	path = fzf/git
 	url = https://github.com/junegunn/fzf-git.sh.git
+[submodule "fzf/docker"]
+	path = fzf/docker
+	url = https://github.com/MartinRamm/fzf-docker.git
