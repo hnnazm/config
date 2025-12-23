@@ -53,6 +53,8 @@ require("lazy").setup({
         "go",
         "typescript",
         "javascript",
+        "tsx",
+        "jsx",
         "vue",
         "lua",
         "css",
