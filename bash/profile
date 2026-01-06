@@ -52,6 +52,7 @@ scripts=(
   "${BASHDOTDIR}/scripts/nvm"
   "${BASHDOTDIR}/scripts/gpt"
   "${BASHDOTDIR}/scripts/go"
+  "${BASHDOTDIR}/scripts/java"
   "${BASHDOTDIR}/scripts/curl"
   "${BASHDOTDIR}/scripts/copilot"
   "${BASHDOTDIR}/scripts/claude"

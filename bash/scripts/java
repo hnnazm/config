@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+export PATH="${HOMEBREW_PREFIX}/opt/openjdk@17/bin:$PATH"
+
+if ! _have java; then
+  return
+fi
