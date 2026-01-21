@@ -25,6 +25,7 @@ export PROMPT_COMMAND='history -a; history -c; history -r'
 
 
 #export PATH="$PATH:/usr/local/sbin"
+export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:/usr/local/go/bin"
 #export PATH="$PATH:/usr/local/opt/openjdk/bin"
 
