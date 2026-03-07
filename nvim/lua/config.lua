@@ -265,6 +265,16 @@ require("lazy").setup({
       vim.lsp.enable('jdtls')
     end,
   },
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    opts = {},
+    keys = {
+      { "[c", function()
+        require("treesitter-context").go_to_context(vim.v.count1)
+      end, desc = "go to context", silent = true },
+    },
+  },
   -- {
   --   "zbirenbaum/copilot.lua",
   --   lazy = false,
