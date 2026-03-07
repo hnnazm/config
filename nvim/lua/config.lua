@@ -45,6 +45,15 @@ require("lazy").setup({
       { "<Leader><Leader>gw",       "<Cmd> FzfLua git_worktrees<CR>",  desc = "Fuzzy find worktrees" },
       { "<Leader><Leader><Leader>", "<Cmd> FzfLua resume<CR>",         desc = "Fuzzy find resume" },
     },
+    opts = {
+      git = {
+        blame = {
+          winopts = {
+            preview = { hidden = "hidden" },
+          },
+        },
+      },
+    },
   },
   {
     "nvim-treesitter/nvim-treesitter",
