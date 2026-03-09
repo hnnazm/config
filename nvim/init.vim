@@ -16,10 +16,6 @@ set shiftround
 set splitbelow
 set splitright
 
-set scrolloff=10
-set sidescroll=10
-set sidescrolloff=10
-
 set number
 set relativenumber
 
