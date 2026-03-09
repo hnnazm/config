@@ -18,8 +18,8 @@
 	df = diff
 	dc = diff --cached
 	dh = diff HEAD
-  dhr = !f() { git diff "${1:-HEAD~1}".."${2:-HEAD}"; }; f
-  dhl = !f() { git log -p "${1:-HEAD~1}".."${2:-HEAD}"; }; f
+	dhr = "!f() { git diff \"${1:-HEAD~1}\"..\"${2:-HEAD}\"; }; f"
+	dhl = "!f() { git log -p \"${1:-HEAD~1}\"..\"${2:-HEAD}\"; }; f"
 	ds = diff --stat
 
 	# Branch management
@@ -74,6 +74,14 @@
 	assumed = "!git ls-files -v | grep ^h | cut -c 3-"
 	snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
 	nevermind = !git reset --hard HEAD && git clean -d -f
+
+	# Worktree
+	wt = worktree
+	wta = worktree add
+	wtl = worktree list
+	wtr = worktree remove
+	wtm = worktree move
+	wtp = worktree prune
 
 [core]
 	excludesfile = ~/.config/git/ignore
