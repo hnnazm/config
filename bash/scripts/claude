@@ -1,8 +1,23 @@
 #!/usr/bin/env bash
 
-if [ ! -d "${HOME}/.claude" ]; then
+if ! _have claude; then
   return
 fi
 
-export PATH="$PATH:${HOME}/.claude/local"
-#alias claude="${HOME}/.claude/local/claude"
+askr() {
+  local dir="/tmp/claude-non-interactive"
+  mkdir -p "$dir"
+  (cd "$dir" && claude --model haiku -p --no-session-persistence "$@")
+}
+
+ask() {
+  local dir="/tmp/claude-non-interactive"
+  mkdir -p "$dir"
+  (cd "$dir" && claude --model haiku -p "$@")
+}
+
+askk() {
+  local dir="/tmp/claude-non-interactive"
+  mkdir -p "$dir"
+  (cd "$dir" && claude --model haiku -p --continue "$@")
+}

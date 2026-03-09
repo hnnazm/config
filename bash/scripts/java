@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-export PATH="${HOMEBREW_PREFIX}/opt/openjdk@17/bin:$PATH"
+javapath="${HOMEBREW_PREFIX}/opt/openjdk@17/bin"
 
-if ! _have java; then
-  return
-fi
+[[ ! -d "$javapath" ]] && return 2>/dev/null
+
+export PATH="${javapath}:$PATH"
+export JAVA_HOME="${HOMEBREW_PREFIX}/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home"
+

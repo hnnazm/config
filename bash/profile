@@ -51,7 +51,6 @@ scripts=(
   "${BASHDOTDIR}/scripts/podman"
   "${BASHDOTDIR}/scripts/docker-nginx"
   "${BASHDOTDIR}/scripts/nvm"
-  "${BASHDOTDIR}/scripts/gpt"
   "${BASHDOTDIR}/scripts/go"
   "${BASHDOTDIR}/scripts/java"
   "${BASHDOTDIR}/scripts/curl"
