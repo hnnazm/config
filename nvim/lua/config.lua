@@ -313,11 +313,11 @@ require("lazy").setup({
   -- },
 })
 
-vim.keymap.set("n", "<Leader>cc", function()
+vim.keymap.set("n", "<Leader>cf", function()
   vim.fn.setreg("+", vim.fn.expand("%:t"))
 end, { desc = "Copy filename to clipboard" })
 
-vim.keymap.set("n", "<Leader>cF", function()
+vim.keymap.set("n", "<Leader>cp", function()
   vim.fn.setreg("+", vim.fn.expand("%:p"))
 end, { desc = "Copy full file path to clipboard" })
 
