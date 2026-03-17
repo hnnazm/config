@@ -77,7 +77,7 @@
 
 	# Worktree
 	wt = worktree
-	wta = worktree add
+  wta = "!f() { git worktree add -b $1 ../$1 --track ${2:-origin/main}; }; f"
 	wtl = worktree list
 	wtr = worktree remove
 	wtm = worktree move
