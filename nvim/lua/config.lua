@@ -59,11 +59,8 @@ require("lazy").setup({
     "nvim-treesitter/nvim-treesitter",
     branch = "main",
     lazy = false,
-    build = ":TSUpdate",
-    config = function()
-      local ts = require("nvim-treesitter")
-      ts.setup({})
-      ts.install({
+    build = function()
+      require("nvim-treesitter").install({
         "go",
         "typescript",
         "javascript",
@@ -82,7 +79,7 @@ require("lazy").setup({
         "java",
         "yaml",
       })
-    end
+    end,
   },
   {
     "mason-org/mason-lspconfig.nvim",
