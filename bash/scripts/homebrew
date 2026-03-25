@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-brewpath="/Users/hannan.azmi/homebrew/bin/brew"
+brewpath="/opt/homebrew/bin/brew"
 
 [[ ! -x "$brewpath" ]] && return 2>/dev/null
 
