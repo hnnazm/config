@@ -48,7 +48,7 @@ scripts=(
   "${BASHDOTDIR}/scripts/fzf"
   "${BASHDOTDIR}/scripts/extract"
   "${BASHDOTDIR}/scripts/docker"
-  "${BASHDOTDIR}/scripts/podman"
+  "${BASHDOTDIR}/scripts/kubernetes"
   "${BASHDOTDIR}/scripts/docker-nginx"
   "${BASHDOTDIR}/scripts/nvm"
   "${BASHDOTDIR}/scripts/go"
