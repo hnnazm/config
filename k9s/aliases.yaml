@@ -1,0 +1,24 @@
+aliases:
+  dp: deployments
+  ds: daemonsets
+  sts: statefulsets
+  rs: replicasets
+  sec: v1/secrets
+  cm: v1/configmaps
+  jo: jobs
+  cj: cronjobs
+  cr: clusterroles
+  crb: clusterrolebindings
+  ro: roles
+  rb: rolebindings
+  np: networkpolicies
+  ing: networking.k8s.io/v1/ingresses
+  pvc: v1/persistentvolumeclaims
+  pv: v1/persistentvolumes
+  sc: storage.k8s.io/v1/storageclasses
+  sa: v1/serviceaccounts
+  ep: v1/endpoints
+  ns: v1/namespaces
+  no: v1/nodes
+  ev: v1/events
+  hpa: autoscaling/v2/horizontalpodautoscalers

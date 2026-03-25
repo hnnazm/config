@@ -7,3 +7,6 @@
 [submodule "fzf/docker"]
 	path = fzf/docker
 	url = https://github.com/MartinRamm/fzf-docker.git
+[submodule "k9s/skins/catppuccin"]
+	path = k9s/skins/catppuccin
+	url = https://github.com/catppuccin/k9s.git
