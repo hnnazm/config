@@ -19,6 +19,8 @@ set splitright
 set number
 set relativenumber
 
+set ignorecase
+
 set signcolumn=yes
 
 set completeopt+=menuone,noselect,popup

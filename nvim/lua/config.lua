@@ -61,6 +61,11 @@ require("lazy").setup({
             preview = { hidden = "hidden" },
           },
         },
+        hunks = {
+          winopts = {
+            preview = { hidden = "hidden" },
+          },
+        },
       },
     },
   },
@@ -89,6 +94,18 @@ require("lazy").setup({
         "yaml",
       })
     end,
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    keys = {
+      { "af", function() require("nvim-treesitter-textobjects.select").select_textobject("@function.outer", "textobjects") end, mode = { "x", "o" }, desc = "around function" },
+      { "if", function() require("nvim-treesitter-textobjects.select").select_textobject("@function.inner", "textobjects") end, mode = { "x", "o" }, desc = "inner function" },
+      { "ac", function() require("nvim-treesitter-textobjects.select").select_textobject("@class.outer", "textobjects") end, mode = { "x", "o" }, desc = "around class" },
+      { "ic", function() require("nvim-treesitter-textobjects.select").select_textobject("@class.inner", "textobjects") end, mode = { "x", "o" }, desc = "inner class" },
+      { "aa", function() require("nvim-treesitter-textobjects.select").select_textobject("@parameter.outer", "textobjects") end, mode = { "x", "o" }, desc = "around argument" },
+      { "ia", function() require("nvim-treesitter-textobjects.select").select_textobject("@parameter.inner", "textobjects") end, mode = { "x", "o" }, desc = "inner argument" },
+    },
   },
   {
     "mason-org/mason-lspconfig.nvim",
