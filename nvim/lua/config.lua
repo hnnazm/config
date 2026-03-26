@@ -274,11 +274,43 @@ require("lazy").setup({
   {
     "nvim-treesitter/nvim-treesitter-context",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
-    opts = {},
+    lazy = false,
+    opts = {
+      enabled = false,
+      max_lines = 3,
+      separator = "─",
+    },
+    config = function(_, opts)
+      require("treesitter-context").setup(opts)
+      vim.api.nvim_set_hl(0, "TreesitterContextBottom", { underline = false })
+    end,
     keys = {
       { "[c", function()
         require("treesitter-context").go_to_context(vim.v.count1)
       end, desc = "go to context", silent = true },
+      { "<leader>ut", function() require("treesitter-context").toggle() end, desc = "toggle treesitter context" },
+    },
+  },
+  {
+    "lewis6991/gitsigns.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {
+      current_line_blame = true,
+      current_line_blame_opts = {
+        virt_text = false,
+      },
+    },
+    keys = {
+      { "]h", function() require("gitsigns").nav_hunk("next") end, desc = "Next hunk" },
+      { "[h", function() require("gitsigns").nav_hunk("prev") end, desc = "Prev hunk" },
+      { "<leader>gp", function() require("gitsigns").preview_hunk() end, desc = "Preview hunk" },
+      { "<leader>gs", function() require("gitsigns").stage_hunk() end, desc = "Stage hunk" },
+      { "<leader>gr", function() require("gitsigns").reset_hunk() end, desc = "Reset hunk" },
+      { "<leader>gu", function() require("gitsigns").undo_stage_hunk() end, desc = "Undo stage hunk" },
+      { "<leader>gS", function() require("gitsigns").stage_buffer() end, desc = "Stage buffer" },
+      { "<leader>gR", function() require("gitsigns").reset_buffer() end, desc = "Reset buffer" },
+      { "<leader>gb", function() require("gitsigns").blame_line({ full = true }) end, desc = "Blame line" },
+      { "<leader>gd", function() require("gitsigns").diffthis() end, desc = "Diff against index" },
     },
   },
   -- {
