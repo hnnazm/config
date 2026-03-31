@@ -115,6 +115,15 @@ require("lazy").setup({
       { "mason-org/mason.nvim", opts = {} },
       {
         "neovim/nvim-lspconfig",
+        keys = {
+          { "<Leader>q", function()
+            if next(vim.lsp.get_clients({ bufnr = 0 })) then
+              vim.diagnostic.setqflist()
+            else
+              vim.notify("No active LSP client", vim.log.levels.WARN)
+            end
+          end, desc = "Send diagnostics to quickfix list" },
+        },
         config = function ()
           vim.diagnostic.config({
             signs = {
