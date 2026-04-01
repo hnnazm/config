@@ -59,6 +59,7 @@ scripts=(
   "${BASHDOTDIR}/scripts/cdtemp"
   "${BASHDOTDIR}/scripts/bitwarden"
   "${BASHDOTDIR}/scripts/neovim"
+  "${BASHDOTDIR}/scripts/gitlab"
 )
 
 for file in "${scripts[@]}"; do

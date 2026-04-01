@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if ! _have glab; then
+  return
+fi
+
+source <(glab completion -s bash)
