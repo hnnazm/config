@@ -10,3 +10,6 @@
 [submodule "k9s/skins/catppuccin"]
 	path = k9s/skins/catppuccin
 	url = https://github.com/catppuccin/k9s.git
+[submodule "containers/hugo/themes/hugo-book"]
+	path = containers/hugo/themes/hugo-book
+	url = https://github.com/alex-shpak/hugo-book

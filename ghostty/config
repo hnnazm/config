@@ -5,3 +5,4 @@ window-padding-x = 4
 window-padding-y = 4
 macos-titlebar-proxy-icon = hidden
 macos-option-as-alt = true
+command = /opt/homebrew/bin/bash --login
