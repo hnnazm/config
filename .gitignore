@@ -15,6 +15,10 @@ gh/.config/gh/hosts.yml
 *.local
 *.local.*
 
+# DevPod runtime state
+devpod/contexts/
+devpod/agent/
+
 # Lock files
 *.lock
 **/*.lock
