@@ -1,0 +1,28 @@
+services:
+  hugo:
+    image: hugomods/hugo
+    container_name: hugo-server
+    
+    ports:
+      - "1313:1313"
+    
+    volumes:
+      # Bind Hugo config, content and themes into the site root (/src)
+      - ./hugo.toml:/src/hugo.toml
+      - ./content:/src/content
+      - ./themes/hugo-book:/src/themes/hugo-book
+      - ~/workspaces/nfp-api/sso-migration:/src/content/docs/sso-migration:ro
+    
+    environment:
+      - HUGO_BASEURL=http://localhost:1313/
+    
+    # --poll: fsnotify is unreliable across Docker bind mounts on macOS,
+    # so poll the filesystem to detect host changes for live-reload.
+    command: server --bind 0.0.0.0 --port 1313 --poll 700ms --disableFastRender
+    
+    # Auto-restart on failure
+    restart: unless-stopped
+    
+    # Keep container running in foreground for logs
+    stdin_open: true
+    tty: true
