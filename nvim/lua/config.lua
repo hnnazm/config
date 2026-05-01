@@ -126,6 +126,7 @@ require("lazy").setup({
         "html",
         "pylsp",
         "yamlls",
+        "gitlab_ci_ls",
       },
     },
     dependencies = {
