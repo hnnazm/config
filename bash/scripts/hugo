@@ -1,0 +1,113 @@
+#!/usr/bin/env bash
+
+if ! _have hugo; then
+  return
+fi
+
+hugo-serve() {
+  local HUGO_CONFIG_DIR="${XDG_CONFIG_HOME:-${HOME}/.config}/hugo"
+  local PIDFILE="${HUGO_CONFIG_DIR}/hugo.pid"
+  local LOGFILE="${HUGO_CONFIG_DIR}/hugo.log"
+
+  case "${1}" in
+    stop)
+      if [[ -f "${PIDFILE}" ]]; then
+        kill "$(cat "${PIDFILE}")" 2>/dev/null && command rm "${PIDFILE}"
+        echo "Stopped hugo server"
+      else
+        echo "No running hugo server found"
+      fi
+      return 0
+      ;;
+    log)
+      tail -f "${LOGFILE}"
+      return 0
+      ;;
+  esac
+
+  if [[ -f "${PIDFILE}" ]] && kill -0 "$(cat "${PIDFILE}")" 2>/dev/null; then
+    echo "Hugo server already running (pid $(cat "${PIDFILE}")) at http://localhost:1313"
+    return 0
+  fi
+
+  hugo server \
+    --source "${HUGO_CONFIG_DIR}" \
+    --bind 0.0.0.0 \
+    --port 1313 \
+    --poll 700ms \
+    "$@" > "${LOGFILE}" 2>&1 &
+
+  echo $! > "${PIDFILE}"
+  echo "Hugo server started (pid $!) at http://localhost:1313"
+  echo "  hugo-serve stop  — stop the server"
+  echo "  hugo-serve log   — tail the log"
+}
+
+hugo-link() {
+  local HUGO_CONFIG_DIR="${XDG_CONFIG_HOME:-${HOME}/.config}/hugo"
+  local TOML="${HUGO_CONFIG_DIR}/hugo.toml"
+  local cur_dir
+  cur_dir="$(pwd)"
+
+  case "${1}" in
+    -h|--help)
+      echo "Usage: hugo-link [SLUG]"
+      echo "  Mount current directory into Hugo as content/SLUG"
+      echo "  SLUG defaults to the current directory's basename"
+      echo ""
+      echo "  hugo-link            # mounts as content/<dirname>"
+      echo "  hugo-link my-docs    # mounts as content/my-docs"
+      echo "  hugo-link -r         # remove mount for current directory"
+      echo "  hugo-link -l         # list all active mounts"
+      return 0
+      ;;
+
+    -l|--list)
+      echo "Active mounts in ${TOML}:"
+      grep -A2 '# hugo-link' "${TOML}" | grep -v '^--$' || echo "  (none)"
+      return 0
+      ;;
+
+    -r|--remove)
+      if ! grep -q "${cur_dir}" "${TOML}"; then
+        echo "No mount found for: ${cur_dir}"
+        return 1
+      fi
+      # Remove the [[module.mounts]] block containing this path
+      awk -v path="${cur_dir}" '
+        /^\[\[module\.mounts\]\]/ { block = $0; next }
+        block {
+          block = block "\n" $0
+          if (/^\[\[/ || /^$/) {
+            if (block !~ path) printf "%s\n", block
+            if (/^\[\[/) { block = $0; next }
+            block = ""
+          }
+          next
+        }
+        { print }
+      ' "${TOML}" > "${TOML}.tmp" && mv "${TOML}.tmp" "${TOML}"
+      echo "Removed mount for: ${cur_dir}"
+      return 0
+      ;;
+  esac
+
+  local slug="${1:-$(basename "${cur_dir}")}"
+  local target="content/${slug}"
+
+  if grep -q "${cur_dir}" "${TOML}"; then
+    echo "Already mounted:"
+    grep -A2 "${cur_dir}" "${TOML}"
+    return 0
+  fi
+
+  if grep -q "\"${target}\"" "${TOML}"; then
+    echo "Slug '${slug}' already in use."
+    return 1
+  fi
+
+  printf '\n[[module.mounts]] # hugo-link\n  source = "%s"\n  target = "%s"\n' \
+    "${cur_dir}" "${target}" >> "${TOML}"
+
+  echo "Mounted: ${cur_dir} -> ${target}"
+}

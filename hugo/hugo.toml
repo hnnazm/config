@@ -1,0 +1,11 @@
+baseURL = "http://localhost:1313/"
+languageCode = "en-us"
+title = "workspaces"
+theme = "hugo-book"
+
+[params]
+  BookSection = "*"
+
+[[module.mounts]]
+  source = "content"
+  target = "content"

@@ -13,3 +13,6 @@
 [submodule "containers/hugo/themes/hugo-book"]
 	path = containers/hugo/themes/hugo-book
 	url = https://github.com/alex-shpak/hugo-book
+[submodule "hugo/themes/hugo-book"]
+	path = hugo/themes/hugo-book
+	url = https://github.com/alex-shpak/hugo-book

@@ -11,7 +11,6 @@ services:
       - ./hugo.toml:/src/hugo.toml
       - ./content:/src/content
       - ./themes/hugo-book:/src/themes/hugo-book
-      - ~/workspaces/nfp-api/sso-migration:/src/content/docs/sso-migration:ro
     
     environment:
       - HUGO_BASEURL=http://localhost:1313/

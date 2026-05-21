@@ -1,6 +1,8 @@
 # Cache and local directories
 cache/
 local/
+hugo/public/
+hugo/resources/
 *.cache
 
 # Sensitive files (tokens, keys, credentials)
