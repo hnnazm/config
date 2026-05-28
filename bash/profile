@@ -60,6 +60,7 @@ scripts=(
   "${BASHDOTDIR}/scripts/bitwarden"
   "${BASHDOTDIR}/scripts/neovim"
   "${BASHDOTDIR}/scripts/gitlab"
+  "${BASHDOTDIR}/scripts/hugo"
 )
 
 for file in "${scripts[@]}"; do
