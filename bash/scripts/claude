@@ -21,3 +21,9 @@ askk() {
   mkdir -p "$dir"
   (cd "$dir" && claude --model haiku -p --continue "$@")
 }
+
+please() {
+  claude --model haiku -p --no-session-persistence \
+    --system-prompt "You are a bash command generator. Output ONLY the raw bash or CLI command that fulfills the user's request — no explanation, no markdown, no code fences. Just the command, ready to copy-paste and run. Prefer standard Unix/POSIX tools and built-in bash features. Only suggest installing an external tool if no standard alternative exists." \
+    "$@"
+}
