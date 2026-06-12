@@ -10,8 +10,6 @@ alias egrep='egrep --color=auto'
 
 alias mkdir='mkdir -pv'
 
-alias rm='rm -i'
-
 alias h='history'
 
 alias clear='clear -x'
