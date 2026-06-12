@@ -6,11 +6,30 @@ fi
 
 eval "$(fzf --bash)"
 
-if [[ ! "$PATH" == "*/${HOMEBREW_PREFIX}/opt/fzf/bin*" ]]; then
-  export PATH="${PATH:+${PATH}:}/${HOMEBREW_PREFIX}/opt/fzf/bin"
-fi
-
-eval "$(fzf --bash)"
-
 test -e "${XDG_CONFIG_HOME}/fzf/git/fzf-git.sh" && source "${XDG_CONFIG_HOME}/fzf/git/fzf-git.sh"
 test -e "${XDG_CONFIG_HOME}/fzf/docker/docker-fzf" && source "${XDG_CONFIG_HOME}/fzf/docker/docker-fzf"
+
+# fzf's stock `kill` completion (_fzf_proc_completion) is broken on macOS: plain
+# `kill <TAB>` dumps `ps` usage errors and hangs on a "Display all N
+# possibilities?" prompt, and the picker only fires behind the `**` trigger.
+# Replace it: `kill <TAB>` fuzzy-picks process(es) directly, while `kill -<TAB>`
+# still completes signal names via bash-completion.
+_fzf_kill_complete() {
+  local cur=${COMP_WORDS[COMP_CWORD]}
+  if [[ $cur == -* ]]; then
+    _comp_load kill 2>/dev/null && _comp_cmd_kill "$@"
+    return
+  fi
+  local selected
+  selected=$(
+    command ps -eo user,pid,ppid,start,time,command 2>/dev/null |
+      fzf --multi --reverse --height=50% --header-lines=1 --wrap \
+          --prompt='kill> ' --query="$cur" |
+      awk '{print $2}' | tr '\n' ' '
+  )
+  selected=${selected% }
+  [[ -n $selected ]] && COMPREPLY=("$selected")
+  bind '"\e[0n": redraw-current-line' 2>/dev/null
+  builtin printf '\e[5n'
+}
+complete -F _fzf_kill_complete kill
