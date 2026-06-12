@@ -18,11 +18,6 @@ export HISTCONTROL=ignoreboth
 export HISTSIZE=10000                   # Maximum events for internal history
 export SAVEHIST=10000                   # Maximum events in history file
 
-# written to disk immediately (history -a).
-# cleared from memory to avoid duplication (history -c).
-# reloaded from the shared history file (history -r).
-export PROMPT_COMMAND='history -a; history -c; history -r'
-
 
 #export PATH="$PATH:/usr/local/sbin"
 export PATH="$HOME/.local/bin:$PATH"
