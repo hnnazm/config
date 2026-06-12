@@ -2,6 +2,17 @@
 
 export NVM_DIR="$HOME/.config/nvm"
 
-[ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"
+# Lazy-load nvm: defer the slow `source nvm.sh` (and its completion) until the
+# first time nvm/node/npm/npx is actually invoked. Saves ~0.4s on shell startup.
+_nvm_load() {
+  unset -f nvm node npm npx 2>/dev/null
+  [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"
+  [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"
+}
 
-[ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"
+if [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ]; then
+  for _cmd in nvm node npm npx; do
+    eval "${_cmd}() { _nvm_load; ${_cmd} \"\$@\"; }"
+  done
+  unset _cmd
+fi

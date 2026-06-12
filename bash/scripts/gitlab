@@ -4,4 +4,11 @@ if ! _have glab; then
   return
 fi
 
-source <(glab completion -s bash)
+# Cache the generated completion; regenerate only when glab is newer.
+# Avoids spawning `glab` (~0.15s) on every shell startup.
+_glab_cache="${XDG_CACHE_HOME:-$HOME/.cache}/glab-completion.bash"
+if [[ ! -s "$_glab_cache" || "$(command -v glab)" -nt "$_glab_cache" ]]; then
+  glab completion -s bash > "$_glab_cache"
+fi
+source "$_glab_cache"
+unset _glab_cache

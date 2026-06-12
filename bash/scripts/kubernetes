@@ -4,7 +4,14 @@ if ! _have kubectl; then
   return
 fi
 
-source <(kubectl completion bash)
+# Cache the generated completion; regenerate only when kubectl is newer.
+# Avoids spawning `kubectl` (~0.08s) on every shell startup.
+_kubectl_cache="${XDG_CACHE_HOME:-$HOME/.cache}/kubectl-completion.bash"
+if [[ ! -s "$_kubectl_cache" || "$(command -v kubectl)" -nt "$_kubectl_cache" ]]; then
+  kubectl completion bash > "$_kubectl_cache"
+fi
+source "$_kubectl_cache"
+unset _kubectl_cache
 
 alias k='kubectl'
 
