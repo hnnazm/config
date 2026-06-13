@@ -1,7 +1,7 @@
 -- Lazy plugin manager setup
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
   vim.fn.system({
     "git",
     "clone",
@@ -19,6 +19,21 @@ vim.api.nvim_create_autocmd("FileType", {
     if pcall(vim.treesitter.start) then
       vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
       vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+  callback = function()
+    vim.hl.on_yank()
+  end,
+})
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client and client:supports_method("textDocument/completion") then
+      vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
     end
   end,
 })
@@ -108,16 +123,69 @@ require("lazy").setup({
     },
   },
   {
-    "mason-org/mason-lspconfig.nvim",
-    opts = {
-      automatic_enable = true,
-      ensure_installed = {
+    "neovim/nvim-lspconfig",
+    dependencies = {
+      { "mason-org/mason.nvim", opts = {} },
+      {
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
+        opts = {
+          ensure_installed = {
+            "gopls",
+            "typescript-language-server",
+            "vue-language-server",
+            "lua-language-server",
+            "tailwindcss-language-server",
+            "phpactor",
+            "bash-language-server",
+            "css-lsp",
+            "vim-language-server",
+            "docker-language-server",
+            "html-lsp",
+            "python-lsp-server",
+            "yaml-language-server",
+            "gitlab-ci-ls",
+            "jdtls",
+          },
+        },
+      },
+    },
+    config = function()
+      vim.diagnostic.config({
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = " ",
+            [vim.diagnostic.severity.WARN]  = " ",
+            [vim.diagnostic.severity.HINT]  = " ",
+            [vim.diagnostic.severity.INFO]  = " ",
+          },
+        },
+        virtual_lines = { current_line = true },
+        float = {
+          format = function(diagnostic)
+            return string.format(
+              "%s (%s) [%s]",
+              diagnostic.message,
+              diagnostic.source,
+              diagnostic.code or diagnostic.user_data.lsp.code
+            )
+          end,
+        },
+      })
+
+      vim.keymap.set("n", "<Leader>q", function()
+        if next(vim.lsp.get_clients({ bufnr = 0 })) then
+          vim.diagnostic.setqflist()
+        else
+          vim.notify("No active LSP client", vim.log.levels.WARN)
+        end
+      end, { desc = "Send diagnostics to quickfix list" })
+
+      vim.lsp.enable({
         "gopls",
         "ts_ls",
         "vue_ls",
         "lua_ls",
         "tailwindcss",
-        "copilot",
         "phpactor",
         "bashls",
         "cssls",
@@ -127,48 +195,11 @@ require("lazy").setup({
         "pylsp",
         "yamlls",
         "gitlab_ci_ls",
-      },
-    },
-    dependencies = {
-      { "mason-org/mason.nvim", opts = {} },
-      {
-        "neovim/nvim-lspconfig",
-        keys = {
-          { "<Leader>q", function()
-            if next(vim.lsp.get_clients({ bufnr = 0 })) then
-              vim.diagnostic.setqflist()
-            else
-              vim.notify("No active LSP client", vim.log.levels.WARN)
-            end
-          end, desc = "Send diagnostics to quickfix list" },
-        },
-        config = function ()
-          vim.diagnostic.config({
-            signs = {
-              active = true,
-              text = {
-                [vim.diagnostic.severity.ERROR] = " ",
-                [vim.diagnostic.severity.WARN]  = " ",
-                [vim.diagnostic.severity.HINT]  = " ",
-                [vim.diagnostic.severity.INFO]  = " ",
-              },
-            },
-            float = {
-              border = "single",
-              format = function(diagnostic)
-                return string.format(
-                  "%s (%s) [%s]",
-                  diagnostic.message,
-                  diagnostic.source,
-                  diagnostic.code or diagnostic.user_data.lsp.code
-                )
-              end,
-            },
-          })
-        end
-      }
-    },
+        "jdtls",
+      })
+    end,
   },
+  --[[
   {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
@@ -176,12 +207,9 @@ require("lazy").setup({
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
-      -- "zbirenbaum/copilot-cmp",
     },
     config = function()
       local cmp = require("cmp")
-
-      -- require("copilot_cmp").setup()
 
       local kind_icons = {
         Text = "",
@@ -209,7 +237,6 @@ require("lazy").setup({
         Event = "",
         Operator = "󰆕",
         TypeParameter = "󰅲",
-        Copilot = "",
       }
 
       cmp.setup({
@@ -232,7 +259,6 @@ require("lazy").setup({
           ["<C-y>"] = cmp.mapping.confirm({ select = true }),
         }),
         sources = cmp.config.sources({
-          -- { name = "copilot" },
           { name = "nvim_lsp" },
           { name = "buffer" },
           { name = "path" },
@@ -240,6 +266,7 @@ require("lazy").setup({
       })
     end,
   },
+  --]]
   {
     "mfussenegger/nvim-dap",
     config = function()
@@ -291,6 +318,10 @@ require("lazy").setup({
       }
     end
   },
+  -- nvim-java — disabled to validate native jdtls (installed via mason ensure_installed
+  -- above, auto-enabled by mason-lspconfig). Re-enable if native jdtls is insufficient
+  -- (nvim-java adds lombok, debug/test runners, and Spring tooling).
+  --[[
   {
     "nvim-java/nvim-java",
     config = function()
@@ -298,6 +329,7 @@ require("lazy").setup({
       vim.lsp.enable('jdtls')
     end,
   },
+  --]]
   {
     "nvim-treesitter/nvim-treesitter-context",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
@@ -340,42 +372,6 @@ require("lazy").setup({
       { "<leader>gd", function() require("gitsigns").diffthis() end, desc = "Diff against index" },
     },
   },
-  -- {
-  --   "zbirenbaum/copilot.lua",
-  --   lazy = false,
-  --   priority = 1000,
-  --   config = function()
-  --     require("copilot").setup({
-  --       suggestion = { enabled = false },
-  --       panel = { enabled = false },
-  --       server_opts_overrides = {
-  --         trace = "verbose",
-  --         cmd = {
-  --           "copilot-language-server",
-  --           "--stdio",
-  --         },
-  --         settings = {
-  --           advanced = {
-  --             listCount = 10,
-  --             inlineSuggestCount = 3,
-  --           },
-  --         },
-  --       },
-  --       filetypes = {
-  --         yaml = true,
-  --         markdown = true,
-  --         help = false,
-  --         gitcommit = true,
-  --         gitrebase = true,
-  --         hgcommit = false,
-  --         svn = false,
-  --         cvs = false,
-  --         ["."] = false,
-  --         ["*"] = true,
-  --       },
-  --     })
-  --   end,
-  -- },
 })
 
 vim.keymap.set("n", "<Leader>cf", function()

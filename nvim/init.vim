@@ -23,8 +23,13 @@ set ignorecase
 
 set signcolumn=yes
 
-set completeopt+=menuone,noselect,popup
+set completeopt+=menuone,noselect,fuzzy,nearest
 set winborder=rounded
+set pumborder=rounded
+
+set inccommand=split
+set jumpoptions+=view
+set foldtext=
 
 " Netrw settings
 let g:netrw_banner = 0
